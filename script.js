@@ -47,14 +47,20 @@ eraser_btn.addEventListener('click', () => {
         eraser = false;
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
-        square.addEventListener('mousemove', changeColor);
+            square.removeEventListener('mousemove');
         });
-    } else {
+        squares.forEach((square) => {
+            square.addEventListener('mousemove', changeColor);
+        });
+    } else if(eraser === false) {
         eraser = true;
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
-        square.addEventListener('mousemove', revertColor);
-        })
+            square.removeEventListener('mousemove');
+        });
+        squares.forEach((square) => {
+            square.addEventListener('mousemove', revertColor);
+        });
     } 
     eraser_btn.classList.toggle('blue-btn');
     console.log(eraser);
