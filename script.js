@@ -47,7 +47,7 @@ eraser_btn.addEventListener('click', () => {
         eraser = false;
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
-            square.removeEventListener('mousemove');
+            square.removeEventListener('mousemove', revertColor);
         });
         squares.forEach((square) => {
             square.addEventListener('mousemove', changeColor);
@@ -56,7 +56,7 @@ eraser_btn.addEventListener('click', () => {
         eraser = true;
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
-            square.removeEventListener('mousemove');
+            square.removeEventListener('mousemove', changeColor);
         });
         squares.forEach((square) => {
             square.addEventListener('mousemove', revertColor);
