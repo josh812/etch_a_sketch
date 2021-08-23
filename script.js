@@ -29,6 +29,7 @@ clear_btn.addEventListener('click', function() {
     squares.forEach((square) => {
     square.addEventListener('mousemove', changeColor);
     });
+    grid_btn.style.backgroundColor = "#eee";
 });
 
 grid_btn.addEventListener('click', Grid);
