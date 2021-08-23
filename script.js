@@ -3,21 +3,27 @@ function changeColor() {
     this.classList.add('drawn');
 }
 
+function revertColor() {
+    this.classList.remove('drawn');
+}
+
 const container = document.querySelector('#container');
 const clear_btn = document.querySelector('#clear-btn');
 const grid_btn = document.querySelector('#grid-btn');
+const eraser_btn = document.querySelector('#eraser-btn');
+let eraser = false;
 
 drawBoard(16);
 
 const squares = container.querySelectorAll('.square');
 squares.forEach((square) => {
-    square.addEventListener('mouseenter', changeColor);
+    square.addEventListener('mousemove', changeColor);
 });
 
 clear_btn.addEventListener('click', function() {
     // draw the new board
     deleteBoard();
-    let num = prompt("Enter the amount of rows you would like: ");
+    let num = prompt("Enter the amount of squares (1-100): ");
     if(num > 100) {
         drawBoard(100);
     } else {
@@ -29,10 +35,30 @@ clear_btn.addEventListener('click', function() {
     squares.forEach((square) => {
     square.addEventListener('mousemove', changeColor);
     });
-    grid_btn.style.backgroundColor = "#eee";
+    grid_btn.classList.remove('blue-btn');
+    eraser_btn.classList.remove('blue-btn');
+    eraser = false;
 });
 
 grid_btn.addEventListener('click', Grid);
+
+eraser_btn.addEventListener('click', () => {
+    if(eraser === true) {
+        eraser = false;
+        const squares = container.querySelectorAll('.square');
+        squares.forEach((square) => {
+        square.addEventListener('mousemove', changeColor);
+        });
+    } else {
+        eraser = true;
+        const squares = container.querySelectorAll('.square');
+        squares.forEach((square) => {
+        square.addEventListener('mousemove', revertColor);
+        })
+    } 
+    eraser_btn.classList.toggle('blue-btn');
+    console.log(eraser);
+});
 
 function drawBoard(num) {
     // create the grid columns and rows
