@@ -5,6 +5,7 @@ function changeColor() {
 
 const container = document.querySelector('#container');
 const clear_btn = document.querySelector('#clear-btn');
+const grid_btn = document.querySelector('#grid-btn');
 
 drawBoard(16);
 
@@ -22,13 +23,15 @@ clear_btn.addEventListener('click', function() {
     } else {
         drawBoard(num);
     }
-    
+
     // Add the event listener to all squares
     const squares = container.querySelectorAll('.square');
     squares.forEach((square) => {
     square.addEventListener('mousemove', changeColor);
     });
 });
+
+grid_btn.addEventListener('click', Grid);
 
 function drawBoard(num) {
     // create the grid columns and rows
@@ -44,4 +47,11 @@ function drawBoard(num) {
 
 function deleteBoard() {
     container.innerHTML = "";
+}
+
+function Grid() {
+    const squares = container.querySelectorAll('.square');
+    squares.forEach((square) => {
+        square.classList.toggle('grid');
+    });
 }
