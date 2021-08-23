@@ -54,4 +54,5 @@ function Grid() {
     squares.forEach((square) => {
         square.classList.toggle('grid');
     });
+    grid_btn.classList.toggle('blue-btn');
 }
