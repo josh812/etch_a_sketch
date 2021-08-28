@@ -79,7 +79,7 @@ function drawBoard(num) {
 }
 
 function deleteBoard() {
-    container.innerHTML = "";
+    container.textContent = "";
 }
 
 function Grid() {
