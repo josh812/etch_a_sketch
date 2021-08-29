@@ -1,10 +1,17 @@
 
 function changeColor() {
-    this.classList.add('drawn');
+    this.style.backgroundColor = "#6767ff";
 }
 
 function revertColor() {
-    this.classList.remove('drawn');
+    this.style.backgroundColor = "#ddd";
+}
+
+function randomColor() {
+    r = Math.floor(Math.random() * (254 - 1) - 1)
+    g = Math.floor(Math.random() * (254 - 1) - 1)
+    b = Math.floor(Math.random() * (254 - 1) - 1)
+    this.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
 }
 
 const container = document.querySelector('#container');
@@ -12,6 +19,8 @@ const clear_btn = document.querySelector('#clear-btn');
 const grid_btn = document.querySelector('#grid-btn');
 const eraser_btn = document.querySelector('#eraser-btn');
 let eraser = false;
+const rainbow_btn = document.querySelector('#rainbow-btn');
+let rainbow = false;
 
 drawBoard(16);
 
@@ -37,7 +46,9 @@ clear_btn.addEventListener('click', function() {
     });
     grid_btn.classList.remove('blue-btn');
     eraser_btn.classList.remove('blue-btn');
+    rainbow_btn.classList.remove('blue-btn');
     eraser = false;
+    rainbow = false;
 });
 
 grid_btn.addEventListener('click', Grid);
@@ -48,22 +59,56 @@ eraser_btn.addEventListener('click', () => {
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
             square.removeEventListener('mousemove', revertColor);
+            square.removeEventListener('mousemove', randomColor);
         });
         squares.forEach((square) => {
             square.addEventListener('mousemove', changeColor);
         });
+        rainbow_btn.classList.remove('blue-btn');
+        rainbow = false;
     } else if(eraser === false) {
         eraser = true;
         const squares = container.querySelectorAll('.square');
         squares.forEach((square) => {
             square.removeEventListener('mousemove', changeColor);
+            square.removeEventListener('mousemove', randomColor);
         });
         squares.forEach((square) => {
             square.addEventListener('mousemove', revertColor);
         });
+        rainbow_btn.classList.remove('blue-btn');
+        rainbow = false;
     } 
     eraser_btn.classList.toggle('blue-btn');
-    console.log(eraser);
+});
+
+rainbow_btn.addEventListener('click', () => {
+    if(rainbow === false) {
+        rainbow = true;
+        const squares = container.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.removeEventListener('mousemove', revertColor);
+            square.removeEventListener('mousemove', changeColor);
+        });
+        squares.forEach((square) => {
+            square.addEventListener('mousemove', randomColor);
+        });
+        eraser_btn.classList.remove('blue-btn');
+        eraser = false;
+    } else if(rainbow === true) {
+        rainbow = false;
+        const squares = container.querySelectorAll('.square');
+        squares.forEach((square) => {
+            square.removeEventListener('mousemove', revertColor);
+            square.removeEventListener('mousemove', randomColor);
+        });
+        squares.forEach((square) => {
+            square.addEventListener('mousemove', changeColor);
+        });
+        eraser_btn.classList.remove('blue-btn');
+        eraser = false;
+    }
+    rainbow_btn.classList.toggle('blue-btn');
 });
 
 function drawBoard(num) {
