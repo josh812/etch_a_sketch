@@ -50,7 +50,6 @@ clear_btn.addEventListener('click', function() {
     eraser_btn.classList.remove('blue-btn');
     rainbow_btn.classList.remove('blue-btn');
     color_palette.value = "#6767ff";
-    color_palette.parentNode.style.backgroundColor = "#6767ff";
     eraser = false;
     rainbow = false;
     current_color = "#6767ff";
@@ -118,7 +117,6 @@ rainbow_btn.addEventListener('click', () => {
 
 color_palette.addEventListener('change', (e) => {
     current_color = e.target.value;
-    e.target.parentNode.style.backgroundColor = e.target.value;
 });
 
 function drawBoard(num) {
