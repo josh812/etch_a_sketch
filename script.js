@@ -1,6 +1,6 @@
 
 function changeColor() {
-    this.style.backgroundColor = "#6767ff";
+    this.style.backgroundColor = `${current_color}`;
 }
 
 function revertColor() {
@@ -21,6 +21,8 @@ const eraser_btn = document.querySelector('#eraser-btn');
 let eraser = false;
 const rainbow_btn = document.querySelector('#rainbow-btn');
 let rainbow = false;
+const color_palette = document.querySelector('#color-input');
+let current_color = "#6767ff";
 
 drawBoard(16);
 
@@ -47,8 +49,11 @@ clear_btn.addEventListener('click', function() {
     grid_btn.classList.remove('blue-btn');
     eraser_btn.classList.remove('blue-btn');
     rainbow_btn.classList.remove('blue-btn');
+    color_palette.value = "#6767ff";
+    color_palette.parentNode.style.backgroundColor = "#6767ff";
     eraser = false;
     rainbow = false;
+    current_color = "#6767ff";
 });
 
 grid_btn.addEventListener('click', Grid);
@@ -109,6 +114,11 @@ rainbow_btn.addEventListener('click', () => {
         eraser = false;
     }
     rainbow_btn.classList.toggle('blue-btn');
+});
+
+color_palette.addEventListener('change', (e) => {
+    current_color = e.target.value;
+    e.target.parentNode.style.backgroundColor = e.target.value;
 });
 
 function drawBoard(num) {

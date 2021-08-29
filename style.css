@@ -10,8 +10,21 @@
 #header {
     font-family: sans-serif;
 }
-.btn {
+#rainbow-btn {
+    margin-right: 3px;
+}
+#color-input {
+    visibility: hidden;
+}
+label {
+    background-color: #6767ff;
+    height: 30px;
     width: 100px;
+    border-radius: 5px;
+    position: absolute;
+}
+.btn {
+    width: 120px;
     height: 30px;
     border-style: solid;
     border-width: 1px;
