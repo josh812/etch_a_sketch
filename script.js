@@ -15,6 +15,13 @@ function randomColor() {
 }
 
 const container = document.querySelector('#container');
+if(window.innerWidth >= window.innerHeight) {
+	container.style.width = '80vh';
+	container.style.height = '80vh';
+} else {
+	container.style.width = '80vw';
+	container.style.height = '80vw';
+}
 const clear_btn = document.querySelector('#clear-btn');
 const grid_btn = document.querySelector('#grid-btn');
 const eraser_btn = document.querySelector('#eraser-btn');
@@ -117,6 +124,16 @@ rainbow_btn.addEventListener('click', () => {
 
 color_palette.addEventListener('change', (e) => {
     current_color = e.target.value;
+});
+
+window.addEventListener('resize', function() {
+	if(window.innerWidth >= window.innerHeight) {
+			container.style.width = '80vh';
+			container.style.height = '80vh';
+	} else {
+			container.style.width = '80vw';
+			container.style.height = '80vw';
+	}
 });
 
 function drawBoard(num) {
